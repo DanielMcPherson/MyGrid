@@ -3,6 +3,7 @@
 #include <QLayout>
 #include <QSlider>
 #include <QLabel>
+#include <QDebug>
 
 MyGrid::MyGrid(QWidget *parent)
     : QMainWindow(parent)
@@ -12,9 +13,8 @@ MyGrid::MyGrid(QWidget *parent)
     // Grid of color boxes
     auto boxLayout = new QGridLayout();
     boxLayout->setSpacing(1);
-    const int size = 3;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
+    for (int i = 0; i < m_gridSize; i++) {
+        for (int j = 0; j < m_gridSize; j++) {
             ColorBox *box = new ColorBox();
             boxLayout->addWidget(box, i, j);
         }
@@ -32,10 +32,11 @@ MyGrid::MyGrid(QWidget *parent)
     slider->setMinimum(2);
     slider->setMaximum(5);
     slider->setValue(3);
+    connect(slider, &QSlider::valueChanged, this, &MyGrid::sliderValueChanged);
     sliderHBoxLayout->addWidget(slider);
     // Label to display current grid size
-    auto gridSizeLabel = new QLabel(QString::number(size));
-    sliderHBoxLayout->addWidget(gridSizeLabel);
+    m_gridSizeLabel = new QLabel(QString::number(m_gridSize));
+    sliderHBoxLayout->addWidget(m_gridSizeLabel);
     sliderLayout->addLayout(sliderHBoxLayout);
     mainLayout->addLayout(sliderLayout);
 
@@ -47,5 +48,11 @@ MyGrid::MyGrid(QWidget *parent)
 
 MyGrid::~MyGrid()
 {
+}
+
+void MyGrid::sliderValueChanged(int value)
+{
+    m_gridSize = value;
+    m_gridSizeLabel->setText(QString::number(m_gridSize));
 }
 
