@@ -8,10 +8,12 @@ CONFIG += C++11
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
+    ColorBox.cpp \
     main.cpp \
     MyGrid.cpp
 
 HEADERS += \
+    ColorBox.h \
     MyGrid.h
 
 # Default rules for deployment.
