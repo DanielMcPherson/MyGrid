@@ -8,6 +8,7 @@ class ColorBox : public QWidget
     Q_OBJECT
 public:
     explicit ColorBox(QWidget *parent = nullptr);
+    ~ColorBox();
 
 signals:
 
