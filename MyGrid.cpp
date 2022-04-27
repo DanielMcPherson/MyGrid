@@ -1,5 +1,5 @@
 #include "MyGrid.h"
-#include "ColorBox.h"
+
 #include <QLayout>
 #include <QSlider>
 #include <QLabel>
@@ -11,10 +11,8 @@ MyGrid::MyGrid(QWidget *parent)
     auto mainLayout = new QVBoxLayout();
 
     // Grid of color boxes
-    m_boxLayout = new QGridLayout();
-    m_boxLayout->setSpacing(1);
-    mainLayout->addLayout(m_boxLayout);
-    resizeGrid();
+    m_grid = new ColorGrid();
+    mainLayout->addWidget(m_grid);
 
     // ToDo: Layout is giving an equal amount of vertical space to grid layout and
     // slider controls. Make grid layout expand to maximum available space.
@@ -33,7 +31,7 @@ MyGrid::MyGrid(QWidget *parent)
     connect(slider, &QSlider::valueChanged, this, &MyGrid::sliderValueChanged);
     sliderHBoxLayout->addWidget(slider);
     // Label to display current grid size
-    m_gridSizeLabel = new QLabel(QString::number(m_gridSize));
+    m_gridSizeLabel = new QLabel(QString::number(m_grid->size()));
     sliderHBoxLayout->addWidget(m_gridSizeLabel);
     sliderLayout->addLayout(sliderHBoxLayout);
     mainLayout->addLayout(sliderLayout);
@@ -42,6 +40,8 @@ MyGrid::MyGrid(QWidget *parent)
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
+
+    resize(500, 500);
 }
 
 MyGrid::~MyGrid()
@@ -50,27 +50,7 @@ MyGrid::~MyGrid()
 
 void MyGrid::sliderValueChanged(int value)
 {
-    m_gridSize = value;
-    m_gridSizeLabel->setText(QString::number(m_gridSize));
-    resizeGrid();
-}
-
-void MyGrid::resizeGrid()
-{
-    // ToDo: Retain boxes that fit in new grid size
-
-    // Remove old boxes from layout
-    QLayoutItem* item;
-    while ((item = m_boxLayout->takeAt(0)) != nullptr) {
-        delete item->widget();
-        delete item;
-    }
-
-    for (int i = 0; i < m_gridSize; i++) {
-        for (int j = 0; j < m_gridSize; j++) {
-            ColorBox *box = new ColorBox();
-            m_boxLayout->addWidget(box, i, j);
-        }
-    }
+    m_grid->resize(value);
+    m_gridSizeLabel->setText(QString::number(m_grid->size()));
 }
 

@@ -1,9 +1,10 @@
 #ifndef MYGRID_H
 #define MYGRID_H
 
+#include "ColorGrid.h"
+
 #include <QMainWindow>
 #include <QLabel>
-#include <QLayout>
 
 class MyGrid : public QMainWindow
 {
@@ -16,13 +17,8 @@ public:
 private slots:
     void sliderValueChanged(int value);
 
-
 private:
-    void resizeGrid();
-
-private:
-    int m_gridSize = 3;
-    QGridLayout *m_boxLayout;
+    ColorGrid *m_grid;
     QLabel *m_gridSizeLabel;
 };
 #endif // MYGRID_H

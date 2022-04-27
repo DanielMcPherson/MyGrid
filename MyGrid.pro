@@ -9,11 +9,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     ColorBox.cpp \
+    ColorGrid.cpp \
     main.cpp \
     MyGrid.cpp
 
 HEADERS += \
     ColorBox.h \
+    ColorGrid.h \
     MyGrid.h
 
 # Default rules for deployment.
