@@ -11,15 +11,13 @@ MyGrid::MyGrid(QWidget *parent)
     auto mainLayout = new QVBoxLayout();
 
     // Grid of color boxes
-    auto boxLayout = new QGridLayout();
-    boxLayout->setSpacing(1);
-    for (int i = 0; i < m_gridSize; i++) {
-        for (int j = 0; j < m_gridSize; j++) {
-            ColorBox *box = new ColorBox();
-            boxLayout->addWidget(box, i, j);
-        }
-    }
-    mainLayout->addLayout(boxLayout);
+    m_boxLayout = new QGridLayout();
+    m_boxLayout->setSpacing(1);
+    mainLayout->addLayout(m_boxLayout);
+    resizeGrid();
+
+    // ToDo: Layout is giving an equal amount of vertical space to grid layout and
+    // slider controls. Make grid layout expand to maximum available space.
 
     // Slider controls
     auto sliderLayout = new QVBoxLayout;
@@ -54,5 +52,25 @@ void MyGrid::sliderValueChanged(int value)
 {
     m_gridSize = value;
     m_gridSizeLabel->setText(QString::number(m_gridSize));
+    resizeGrid();
+}
+
+void MyGrid::resizeGrid()
+{
+    // ToDo: Retain boxes that fit in new grid size
+
+    // Remove old boxes from layout
+    QLayoutItem* item;
+    while ((item = m_boxLayout->takeAt(0)) != nullptr) {
+        delete item->widget();
+        delete item;
+    }
+
+    for (int i = 0; i < m_gridSize; i++) {
+        for (int j = 0; j < m_gridSize; j++) {
+            ColorBox *box = new ColorBox();
+            m_boxLayout->addWidget(box, i, j);
+        }
+    }
 }
 
