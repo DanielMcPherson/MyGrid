@@ -18,6 +18,9 @@ MyGrid::MyGrid(QWidget *parent)
     auto sliderLayout = new QVBoxLayout;
     sliderLayout->setAlignment(Qt::AlignBottom);
     auto sliderLabel = new QLabel(tr("Grid Size"));
+    auto font = sliderLabel->font();
+    font.setBold(true);
+    sliderLabel->setFont(font);
     sliderLayout->addWidget(sliderLabel);
     auto sliderHBoxLayout = new QHBoxLayout;
     // Slider to control grid size
@@ -30,6 +33,7 @@ MyGrid::MyGrid(QWidget *parent)
     // Label to display current grid size
     m_gridSizeLabel = new QLabel(QString::number(m_grid->size()));
     sliderHBoxLayout->addWidget(m_gridSizeLabel);
+    sliderHBoxLayout->addStretch();
     sliderLayout->addLayout(sliderHBoxLayout);
     mainLayout->addLayout(sliderLayout);
 
@@ -37,6 +41,8 @@ MyGrid::MyGrid(QWidget *parent)
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
+
+    resize(400, 400);
 }
 
 MyGrid::~MyGrid()
