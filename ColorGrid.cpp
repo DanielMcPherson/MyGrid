@@ -48,7 +48,6 @@ void ColorGrid::resize(int size)
                 box = new ColorBox();
                 m_colorBoxes[position] = box;
                 // Use statusTip to hold grid coordinates for debugging purposes
-                box->setToolTip(position);
                 box->setStatusTip(position);
             }
             m_layout->addWidget(box, i, j);
