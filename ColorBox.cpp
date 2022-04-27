@@ -5,7 +5,7 @@
 ColorBox::ColorBox(QWidget *parent)
     : QWidget{parent}
 {
-
+    setMinimumSize(50, 50);
 }
 
 void ColorBox::paintEvent(QPaintEvent *)

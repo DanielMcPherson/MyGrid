@@ -14,9 +14,6 @@ MyGrid::MyGrid(QWidget *parent)
     m_grid = new ColorGrid();
     mainLayout->addWidget(m_grid);
 
-    // ToDo: Layout is giving an equal amount of vertical space to grid layout and
-    // slider controls. Make grid layout expand to maximum available space.
-
     // Slider controls
     auto sliderLayout = new QVBoxLayout;
     sliderLayout->setAlignment(Qt::AlignBottom);
@@ -40,8 +37,6 @@ MyGrid::MyGrid(QWidget *parent)
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(mainLayout);
     setCentralWidget(centralWidget);
-
-    resize(500, 500);
 }
 
 MyGrid::~MyGrid()

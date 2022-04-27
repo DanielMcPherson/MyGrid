@@ -7,6 +7,8 @@ ColorGrid::ColorGrid(int size, QWidget *parent)
     m_layout = new QGridLayout();
     setLayout(m_layout);
     m_layout->setSpacing(2);
+    setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     resize(size);
 }
 
