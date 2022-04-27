@@ -1,5 +1,6 @@
 #include "ColorBox.h"
 #include <QPainter>
+#include <QDebug>
 
 ColorBox::ColorBox(QWidget *parent)
     : QWidget{parent}
@@ -10,5 +11,12 @@ ColorBox::ColorBox(QWidget *parent)
 void ColorBox::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
-    painter.fillRect(rect(), Qt::red);
+    QColor color = m_toggled ? Qt::blue : Qt::red;
+    painter.fillRect(rect(), color);
+}
+
+void ColorBox::mousePressEvent(QMouseEvent *event)
+{
+    m_toggled = !m_toggled;
+    repaint();
 }

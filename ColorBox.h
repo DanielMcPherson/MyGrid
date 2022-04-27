@@ -13,7 +13,10 @@ signals:
 
 protected:
     void paintEvent(QPaintEvent *);
+    void mousePressEvent(QMouseEvent *event);
 
+private:
+    bool m_toggled = false;
 };
 
 #endif // COLORBOX_H
