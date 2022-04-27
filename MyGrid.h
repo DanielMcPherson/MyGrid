@@ -16,6 +16,7 @@ public:
 
 private slots:
     void sliderValueChanged(int value);
+    void showAboutDialog();
 
 private:
     ColorGrid *m_grid;

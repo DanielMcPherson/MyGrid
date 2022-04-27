@@ -6,6 +6,7 @@ TEMPLATE = app
 
 CONFIG += C++11
 DEFINES += QT_DEPRECATED_WARNINGS
+QMAKE_LFLAGS += -no-pie    // Makes executable runnable on Ubuntu
 
 SOURCES += \
     ColorBox.cpp \

@@ -3,6 +3,8 @@
 #include <QLayout>
 #include <QSlider>
 #include <QLabel>
+#include <QMenuBar>
+#include <QMessageBox>
 #include <QDebug>
 
 MyGrid::MyGrid(QWidget *parent)
@@ -37,6 +39,12 @@ MyGrid::MyGrid(QWidget *parent)
     sliderLayout->addLayout(sliderHBoxLayout);
     mainLayout->addLayout(sliderLayout);
 
+    // Create About menu
+    auto aboutMenu = menuBar()->addMenu(tr("About"));
+    auto aboutAction = new QAction("About MyGrid");
+    connect(aboutAction, &QAction::triggered, this, &MyGrid::showAboutDialog);
+    aboutMenu->addAction(aboutAction);
+
     // Set window to main layout created above
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(mainLayout);
@@ -55,3 +63,16 @@ void MyGrid::sliderValueChanged(int value)
     m_gridSizeLabel->setText(QString::number(m_grid->size()));
 }
 
+void MyGrid::showAboutDialog()
+{
+    QString str =
+            "MyGrid\n\n"
+            "Example Qt C++ program\n"
+            "  Daniel McPherson\n"
+            "  27 April 2022\n\n"
+            "https://github.com/DanielMcPherson/MyGrid";
+
+    QMessageBox msg;
+    msg.setText(str);
+    msg.exec();
+}
