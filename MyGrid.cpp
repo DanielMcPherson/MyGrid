@@ -2,6 +2,7 @@
 #include "ColorBox.h"
 #include <QLayout>
 #include <QSlider>
+#include <QLabel>
 
 MyGrid::MyGrid(QWidget *parent)
     : QMainWindow(parent)
@@ -20,9 +21,23 @@ MyGrid::MyGrid(QWidget *parent)
     }
     mainLayout->addLayout(boxLayout);
 
+    // Slider controls
+    auto sliderLayout = new QVBoxLayout;
+    sliderLayout->setAlignment(Qt::AlignBottom);
+    auto sliderLabel = new QLabel(tr("Grid Size"));
+    sliderLayout->addWidget(sliderLabel);
+    auto sliderHBoxLayout = new QHBoxLayout;
     // Slider to control grid size
     auto slider = new QSlider(Qt::Horizontal);
-    mainLayout->addWidget(slider);
+    slider->setMinimum(2);
+    slider->setMaximum(5);
+    slider->setValue(3);
+    sliderHBoxLayout->addWidget(slider);
+    // Label to display current grid size
+    auto gridSizeLabel = new QLabel(QString::number(size));
+    sliderHBoxLayout->addWidget(gridSizeLabel);
+    sliderLayout->addLayout(sliderHBoxLayout);
+    mainLayout->addLayout(sliderLayout);
 
     // Set window to main layout created above
     QWidget *centralWidget = new QWidget;
